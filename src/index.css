@@ -1,13 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color:rgb(239, 239, 239)
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+.list-transition-enter {
+  /*We give the list the initial dimension of the list button*/
+  top: 0;
+  width: 120px;
+  max-height: 40px;
+  color: transparent;
+  background-color: #5a564c;
+  }
+  /* This is where we can add the transition*/
+  .list-transition-enter-active {
+  top: 45px;
+  width: 200px;
+  max-height: 200px;
+  background-color: #9e8949;
+  transition: all 400ms;
+  }
+  /* This fires as soon as the this.state.showList is false */
+  .list-transition-exit {
+  top: 45px;
+  width: 200px;
+  max-height: 200px;
+  background-color: #9e8949;
+  }
+  /* fires as element leaves the DOM*/
+  .list-transition-exit-active {
+  top: 0;
+  width: 120px;
+  max-height: 40px;
+  color: transparent;
+  background-color: #5a564c;
+  transition: all 400ms;
+  }
+
+
+
+.fade-enter {
+  opacity: 0.01;
+}
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 400ms ease-in-out;
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0.01;
+  transition: opacity 400ms ease-in-out;
+}
+
+.grow-enter {
+  transform: scale(0);
+}
+.grow-enter-active {
+  transform: scale(1);
+  transition: all 200ms ease-in-out;
+}
+.grow-exit {
+  transform: scale(1);
+}
+.grow-exit-active {
+  transform: scale(0);
+  transition: all 200ms ease-in-out;
+}
+
+.growc-enter {
+  transform-origin: top right;
+  transform: scale(0);
+}
+.growc-enter-active {
+  transform-origin: top right;
+  transform: scale(1);
+  transition: all 200ms ease-in-out;
+}
+.growc-exit {
+  transform-origin: top right;
+  transform: scale(1);
+}
+.growc-exit-active {
+  transform-origin: top right;
+  transform: scale(0);
+  transition: all 200ms ease-in-out;
 }
