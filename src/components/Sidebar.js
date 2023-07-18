@@ -25,6 +25,9 @@ const Sidebar = () => {
           <li className="p-2 pl-3 hover:bg-red-400">
             <NavLink to="/gallery">Gallery</NavLink>
           </li>
+          <li className="p-2 pl-3 hover:bg-red-400">
+            <NavLink to="/calendar">Calendar</NavLink>
+          </li>
         </ul>
       </nav>
     </div>

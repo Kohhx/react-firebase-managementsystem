@@ -20,6 +20,7 @@ import Dashboard from "./pages/Dashboard";
 import Sidebar from "./components/Sidebar";
 import PhotoList from "./pages/PhotoList";
 import SidebarLayout from "./layout/SidebarLayout";
+import CalendarPage from "./pages/CalendarPage";
 
 function App() {
   const { authReady, user } = useAuthContext();
@@ -59,6 +60,10 @@ function App() {
                 path="/login"
                 element={user ? <Navigate to="/dashboard" /> : <Login />}
               />
+               <Route
+                  path="/signup"
+                  element={user ? <Navigate to="/dashboard" /> : <Signup />}
+                />
 
               <Route element={<SidebarLayout />}>
                 <Route path="/xxx" element={<Dashboard />} />
@@ -67,9 +72,10 @@ function App() {
                   element={user ? <PhotoList /> : <Navigate to="/Login" />}
                 />
                 <Route
-                  path="/signup"
-                  element={user ? <Navigate to="/dashboard" /> : <Signup />}
+                  path="/calendar"
+                  element={user ? <CalendarPage /> : <Navigate to="/Login" />}
                 />
+
                 <Route
                   path="/dashboard"
                   element={user ? <Dashboard /> : <Navigate to="/Login" />}
