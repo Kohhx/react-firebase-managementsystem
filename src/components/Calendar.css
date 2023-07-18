@@ -1,0 +1,55 @@
+.calendar-container {
+border: black solid 5px;
+}
+
+.calendar-header {
+border:none;
+}
+
+th,
+td {
+  text-align: center;
+  /* padding: 4px 8px 4px 8px; */
+  padding: 10px 40px 60px 40px;
+  border: 0.5px gray solid;
+}
+
+td{
+  position: relative;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.calendar-day:hover {
+  transform: scale(1.2);
+  color: purple;
+}
+
+.today {
+  border: 1px solid purple;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.day-selected {
+  transform: scale(1.2);
+  font-weight: 700;
+  color: purple;
+}
+
+.cell-images{
+  position: absolute;
+  bottom:0;
+  left:0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cell-images img {
+  width:25px;
+  height:25px;
+  object-fit: cover;
+}
