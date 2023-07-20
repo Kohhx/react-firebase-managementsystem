@@ -1,0 +1,28 @@
+.chatroom-container {
+
+
+}
+
+.chatroom-grid {
+  display: grid;
+}
+
+.leftbar-section {
+  grid-area: a;
+  background-color: orange;
+}
+
+.header-section {
+  grid-area: b;
+  background-color: green;
+}
+
+.chat-section {
+  grid-area: c;
+  background-color: rgb(18, 41, 214);
+}
+
+.input-section {
+  grid-area: d;
+  background-color: pink;
+}

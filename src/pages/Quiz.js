@@ -24,7 +24,6 @@ const Quiz = () => {
         }
       });
     }
-
     return jsonObjects;
   }
 
