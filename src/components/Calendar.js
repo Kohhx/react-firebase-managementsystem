@@ -5,6 +5,9 @@ import { GrCaretNext } from "react-icons/gr";
 import { GrCaretPrevious } from "react-icons/gr";
 import { useFirestoreImage } from "../hooks/useFirestoreImage";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { AiFillLeftCircle } from "react-icons/ai";
+import { AiFillRightCircle } from "react-icons/ai";
+import Modal from "./Modal";
 
 const Calendar = ({ options }) => {
   const { user } = useAuthContext();
@@ -12,6 +15,20 @@ const Calendar = ({ options }) => {
   const { addImageDocument, getAllImages, isPending, deleteImage } =
     useFirestoreImage(user.uid, "images");
   const [imagesLength, setImagesLength] = useState(-1);
+  const [openModal, setOpenModal] = useState(false);
+  const [modalImages, setModalImages] = useState([]);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+  const prevImage = () => {
+    if (selectedImageIndex > 0) {
+      setSelectedImageIndex((prev) => prev - 1);
+    }
+  };
+  const nextImage = () => {
+    if (selectedImageIndex < imagesLength - 1) {
+      setSelectedImageIndex((prev) => prev + 1);
+    }
+  };
 
   useEffect(() => {
     getAllImages().then((data) => {
@@ -33,6 +50,8 @@ const Calendar = ({ options }) => {
     imagesHash[date] = [...imagesHash[date], image];
   });
 
+  console.log("imageHash", imagesHash);
+
   const [calendar, setCalendar] = useState({
     cal: moment(),
     allDaysDisplay: [],
@@ -43,7 +62,6 @@ const Calendar = ({ options }) => {
   // Get all days of the week Sun, mon, tue, wed, thu, fri, sat
   const weekdayshort = moment.weekdaysShort();
   const monthshort = moment.monthsShort();
-
 
   const next = () => {
     setCalendar({
@@ -99,13 +117,17 @@ const Calendar = ({ options }) => {
     return dayClass.join(" ");
   };
 
+  console.log("Modal Images", modalImages)
+
   const setDays = () => {
     let daysInMonth = [];
     for (let d = 1; d <= calendar.cal.daysInMonth(); d++) {
       const thisMonth = parseInt(calendar.cal.format("M"));
       const thisYear = parseInt(calendar.cal.format("YYYY"));
-      console.log("thisMonth", thisMonth-1)
-      const thisDate = moment().set({'month': thisMonth-1, 'date': d, 'year': thisYear}).format("YYYY-MM-DD");
+      console.log("thisMonth", thisMonth - 1);
+      const thisDate = moment()
+        .set({ month: thisMonth - 1, date: d, year: thisYear })
+        .format("YYYY-MM-DD");
       daysInMonth.push(
         <td
           key={d}
@@ -118,7 +140,14 @@ const Calendar = ({ options }) => {
           }}
         >
           <span className={buildDayClass(d)}>{d}</span>
-          <div className="cell-images">
+          <div
+            className="cell-images cursor-pointer"
+            onClick={() => {
+              setModalImages(imagesHash[thisDate]);
+              setImagesLength(imagesHash[thisDate].length);
+              setOpenModal(true);
+            }}
+          >
             {imagesHash[thisDate] &&
               imagesHash[thisDate].length > 0 &&
               imagesHash[thisDate].map((image) => {
@@ -156,21 +185,51 @@ const Calendar = ({ options }) => {
   };
 
   return (
-    <div className="min-w-[800px] calendar-container">
-      {calendar.selectedDate}
-      <div className="flex items-center mx-auto border text-center p-3 bg-slate-400 text-white calendar-header">
-        <GrCaretPrevious className="cursor-pointer" onClick={previous} />
-        <span className="mx-auto">
-          {calendar.cal.format("MMMM")}, {calendar.cal.format("YYYY")}
-        </span>
-        <GrCaretNext className="cursor-pointer" onClick={next} />
-      </div>
+    <>
+      <Modal
+        arrow={
+          <>
+            <AiFillLeftCircle
+              className="arrow-icon arrow-prev"
+              onClick={prevImage}
+            />
+            <AiFillRightCircle
+              className="arrow-icon arrow-next"
+              onClick={nextImage}
+            />
+          </>
+        }
+        isOpen={openModal}
+        closeModal={() => setOpenModal(false)}
+      >
+        <div className="modal-children-content">
+          <img
+            height={"600px"}
+            width="600px"
+            src={modalImages[selectedImageIndex]?.imgUrl}
+            alt="image"
+          />
+          <div className="modal-caption">
+            <span>{modalImages[selectedImageIndex]?.caption}</span>
+          </div>
+        </div>
+      </Modal>
+      <div className="min-w-[800px] calendar-container">
+        {calendar.selectedDate}
+        <div className="flex items-center mx-auto border text-center p-3 bg-slate-400 text-white calendar-header">
+          <GrCaretPrevious className="cursor-pointer" onClick={previous} />
+          <span className="mx-auto">
+            {calendar.cal.format("MMMM")}, {calendar.cal.format("YYYY")}
+          </span>
+          <GrCaretNext className="cursor-pointer" onClick={next} />
+        </div>
 
-      <table className="w-full">
-        <thead>{weekdayshortDisplay}</thead>
-        <tbody>{setDaysDisplay()}</tbody>
-      </table>
-    </div>
+        <table className="w-full">
+          <thead>{weekdayshortDisplay}</thead>
+          <tbody>{setDaysDisplay()}</tbody>
+        </table>
+      </div>
+    </>
   );
 };
 

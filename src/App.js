@@ -22,6 +22,7 @@ import PhotoList from "./pages/PhotoList";
 import SidebarLayout from "./layout/SidebarLayout";
 import CalendarPage from "./pages/CalendarPage";
 import Quiz from "./pages/Quiz";
+import EditorPage from "./pages/EditorPage";
 
 function App() {
   const { authReady, user } = useAuthContext();
@@ -84,6 +85,10 @@ function App() {
                   <Route
                   path="/quiz"
                   element={user ? <Quiz /> : <Navigate to="/Login" />}
+                />
+                  <Route
+                  path="/editor"
+                  element={user ? <EditorPage /> : <Navigate to="/Login" />}
                 />
                 <Route
                   path="/create"
