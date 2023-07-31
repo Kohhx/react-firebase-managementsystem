@@ -2,7 +2,7 @@ import React from 'react'
 import "./Login.css"
 import { useLogin } from '../hooks/useLogin'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 const Login = () => {
   const navigate = useNavigate();
@@ -41,6 +41,7 @@ const Login = () => {
             </div>
           </div>
           {error && <p className="text-red-500">{error}</p>}
+          Register <Link className="underline text-blue-600" to="/signup">Now</Link>
           <div class="mt-6 flex items-center justify-end gap-x-6">
             {!isPending && <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Login</button>}
             {isPending && <button disabled type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:bg-indigo-300">Loading...</button>}
