@@ -23,6 +23,11 @@ import SidebarLayout from "./layout/SidebarLayout";
 import CalendarPage from "./pages/CalendarPage";
 import Quiz from "./pages/Quiz";
 import EditorPage from "./pages/EditorPage";
+import ChatroomPage from "./pages/ChatroomPage";
+import ParsingPage from "./pages/ParsingPage";
+import StartVideoCall from "./pages/StartVideoCall";
+import VideoCall from "./pages/VideoCall";
+import RTCContextProvider from "./context/RTCContext";
 
 function App() {
   const { authReady, user } = useAuthContext();
@@ -46,6 +51,7 @@ function App() {
           {/* <Navbar /> */}
           {/* {user && <Sidebar />} */}
           {/* <Navbar /> */}
+          <RTCContextProvider>
           <div className="">
             <Routes>
               <Route
@@ -62,10 +68,10 @@ function App() {
                 path="/login"
                 element={user ? <Navigate to="/dashboard" /> : <Login />}
               />
-               <Route
-                  path="/signup"
-                  element={user ? <Navigate to="/dashboard" /> : <Signup />}
-                />
+              <Route
+                path="/signup"
+                element={user ? <Navigate to="/dashboard" /> : <Signup />}
+              />
 
               <Route element={<SidebarLayout />}>
                 <Route path="/xxx" element={<Dashboard />} />
@@ -82,11 +88,11 @@ function App() {
                   path="/dashboard"
                   element={user ? <Dashboard /> : <Navigate to="/Login" />}
                 />
-                  <Route
+                <Route
                   path="/quiz"
                   element={user ? <Quiz /> : <Navigate to="/Login" />}
                 />
-                  <Route
+                <Route
                   path="/editor"
                   element={user ? <EditorPage /> : <Navigate to="/Login" />}
                 />
@@ -95,12 +101,31 @@ function App() {
                   element={user ? <Create /> : <Navigate to="/Login" />}
                 />
                 <Route
+                  path="/video-call"
+                  element={user ? <StartVideoCall /> : <Navigate to="/Login" />}
+                />
+
+                  <Route
+                    path="/video-call/:roomId"
+                    element={user ? <VideoCall /> : <Navigate to="/Login" />}
+                  />
+
+                <Route
+                  path="/parse"
+                  element={user ? <ParsingPage /> : <Navigate to="/Login" />}
+                />
+                <Route
+                  path="/chatroom"
+                  element={user ? <ChatroomPage /> : <Navigate to="/Login" />}
+                />
+                <Route
                   path="/project/:id"
                   element={user ? <Project /> : <Navigate to="/Login" />}
                 />
               </Route>
             </Routes>
           </div>
+          </RTCContextProvider>
         </Router>
       )}
     </div>

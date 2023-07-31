@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { useSignup } from '../hooks/useSignup'
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
-import  { useNavigate } from 'react-router-dom'
+import  { useNavigate, Link } from 'react-router-dom'
+
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -53,7 +54,6 @@ const Signup = () => {
   }
 
   const handleSignUpSubmit = async (data) => {
-
     console.log(formState)
     // Get Values
     console.log("Display name", getValues("displayName"))

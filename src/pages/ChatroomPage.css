@@ -1,28 +1,59 @@
 .chatroom-container {
-
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
 }
 
 .chatroom-grid {
+  padding:5px;
+  background-color: rgb(102, 154, 102);
   display: grid;
+  height: 550px;
+  width:800px;
+  grid-template-areas:
+    "a b"
+    "a c"
+    "a d";
+    grid-template-columns: 1fr 2fr ;
+    grid-template-rows:0.8fr 3fr 0.5fr;
+    gap:5px;
+
 }
 
 .leftbar-section {
   grid-area: a;
-  background-color: orange;
+  /* background-color: orange; */
+  background-color: rgb(255, 234, 234);
 }
 
 .header-section {
   grid-area: b;
-  background-color: green;
+  /* height: 1fr; */
+  /* background-color: green; */
+  background-color: rgb(255, 234, 234);
 }
 
 .chat-section {
   grid-area: c;
-  background-color: rgb(18, 41, 214);
+  /* height: 5fr; */
+  /* background-color: rgb(18, 41, 214); */
+  background-color: rgb(255, 234, 234);
 }
 
 .input-section {
   grid-area: d;
-  background-color: pink;
+  /* height: 1fr; */
+  /* background-color: pink; */
+  background-color: rgb(255, 234, 234);
+}
+
+/* .search-icon{
+  position: absolute;
+  left:;
+} */
+
+input {
+  width: 100%;
+  outline:none;
 }

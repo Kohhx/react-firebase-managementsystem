@@ -36,6 +36,7 @@ export const useSignup = () => {
         online: true,
         displayName,
         photoURL: imgUrl,
+        email,
       })
 
       // Update the user context

@@ -40,6 +40,15 @@ const Sidebar = () => {
           <li className="p-2 pl-3 hover:bg-red-400">
             <NavLink to="/editor">Editor</NavLink>
           </li>
+          <li className="p-2 pl-3 hover:bg-red-400">
+            <NavLink to="/chatroom">Chatroom</NavLink>
+          </li>
+          <li className="p-2 pl-3 hover:bg-red-400">
+            <NavLink to="/parse">Parse</NavLink>
+          </li>
+          <li className="p-2 pl-3 hover:bg-red-400">
+            <NavLink to="/video-call">Video Call</NavLink>
+          </li>
         </ul>
       </nav>
     </div>
